@@ -1,19 +1,34 @@
 <script setup>
-defineProps({
+import axios from "axios";
+import { toRefs } from "vue";
+
+const props = defineProps({
   urlItem: Object,
 });
+
+const { urlItem } = toRefs(props);
+
+const handleActiveChange = () => {
+  axios.patch("", { isActive: !urlItem.value.isActive });
+};
 </script>
 
 <template>
   <li>
     <div id="checkbox">
-      <input v-model="urlItem.isActive" type="checkbox" />
+      <input
+        @change="handleActiveChange"
+        v-model="urlItem.isActive"
+        type="checkbox"
+      />
     </div>
     <h3>Alias : {{ urlItem.alias || "N/A" }}</h3>
     <div>Original Url : {{ urlItem.originalUrl }}</div>
     <div>Times Clicked :{{ urlItem.clicked }}</div>
   </li>
 </template>
+
+
 
 <style scoped>
 li {
