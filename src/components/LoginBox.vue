@@ -1,18 +1,36 @@
-<script></script>
+<script setup>
+import axios from "axios";
+import { ref } from "vue";
+
+const email = ref("");
+const password = ref("");
+
+const login = () => {
+  axios
+    .post("https://url-shortner-c0kv.onrender.com/v1/login", {
+      email: email.value,
+      password: password.value,
+    })
+    .then(({ data }) => {
+      localStorage.setItem("token", data.token);
+      email.value = "";
+      password.value = "";
+    })
+    .catch((err) => {
+      console.log("fail", err);
+    });
+};
+</script>
 
 <template>
-  <form>
-    <label>
-      email
-      <input />
-    </label>
+  <form @submit.prevent="login">
+    <label for="email">email </label>
+    <input v-model="email" type="email" id="email" />
 
-    <label
-      >password
-      <input />
-    </label>
+    <label for="password">password </label>
+    <input v-model="password" type="password" id="password" />
 
-    <button>login</button>
+    <button type="submit">login</button>
   </form>
 </template>
 
@@ -22,6 +40,8 @@ form {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border: 0.1rem white solid;
+  padding: 2rem;
 }
 
 label {
