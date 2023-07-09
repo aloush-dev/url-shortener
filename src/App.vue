@@ -6,14 +6,8 @@ const token = localStorage.getItem("token");
 </script>
 
 <template>
-  <div id="homescreen">
-    <header>URL Shortener</header>
-
-    <main>
-      <LoginBox />
-      <URLShortener />
-    </main>
-  </div>
+  <header>URL Shortener</header>
+  <router-view></router-view>
 </template>
 
 <style scoped>
