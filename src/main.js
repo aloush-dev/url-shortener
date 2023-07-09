@@ -5,11 +5,11 @@ import { createApp } from "vue";
 import App from "./App.vue";
 
 import Home from "./components/Home.vue";
-import MyProfile from "./components/MyProfile.vue";
+import Shortener from "./components/Shortener.vue";
 
 const routes = [
   { path: "/", component: Home },
-  { path: "/me", component: MyProfile },
+  { path: "/url", component: Shortener },
 ];
 
 const router = createRouter({

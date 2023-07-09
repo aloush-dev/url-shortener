@@ -1,17 +1,53 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watchEffect } from "vue";
 import axios from "axios";
+import { getToken } from "../utils/utils";
 
 const url = ref("");
 const urlNickname = ref("");
+const myUrls = ref([]);
+const token = getToken();
 
-const urlSubmit = () => {
-  axios.post("", { url: url.value, alias: urlNickname.value });
+watchEffect(async () => {
+  const response = await axios.get(
+    "https://url-shortner-c0kv.onrender.com/v1/urls",
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  myUrls.value = response.data.urls;
+});
+
+const postURL = () => {
+  axios
+    .post(
+      "https://url-shortner-c0kv.onrender.com/v1/urls",
+      {
+        url: url.value,
+        alias: urlNickname.value,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+    .then(({ data }) => {
+      url.value = "";
+      urlNickname.value = "";
+    })
+    .catch((err) => {
+      console.log("fail", err);
+    });
 };
 </script>
 
 <template>
-  <form @submit.prevent="urlSubmit">
+  <form @submit.prevent="postURL">
     <label for="url">URL To Shorten</label>
     <input placeholder="put a url in me" v-model="url" type="url" id="url" />
 
@@ -45,4 +81,6 @@ button {
   color: white;
   font-weight: 900;
 }
+
+
 </style>
