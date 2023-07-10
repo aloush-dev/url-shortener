@@ -4,7 +4,6 @@ import MyUrls from "./MyUrls.vue";
 </script>
 
 <template>
-  <h1>The Shortening</h1>
   <URLShortener />
   <MyUrls />
 </template>

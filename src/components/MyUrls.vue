@@ -25,14 +25,18 @@ watchEffect(async () => {
   <section id="my-urls">
     <h2>My URLs</h2>
     <ul>
-      <MyUrlItem v-for="urlItem in myUrls" :key="urlItem.id" :urlItem="urlItem" />
+      <MyUrlItem
+        v-for="urlItem in myUrls"
+        :key="urlItem.id"
+        :urlItem="urlItem"
+      />
     </ul>
   </section>
 </template>
 
 <style scoped>
-#my-urls {
-  
+#my-urls h2 {
+  text-align: center;
 }
 
 ul {
@@ -40,5 +44,6 @@ ul {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding: 0;
 }
 </style>
