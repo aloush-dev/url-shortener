@@ -47,25 +47,37 @@ const postURL = () => {
 </script>
 
 <template>
-  <form @submit.prevent="postURL">
-    <label for="url">URL To Shorten</label>
-    <input placeholder="put a url in me" v-model="url" type="url" id="url" />
+  <div id="container">
+    <form @submit.prevent="postURL">
+      <label for="url">URL To Shorten</label>
+      <input placeholder="put a url in me" v-model="url" type="url" id="url" />
 
-    <label for="url-alias">URL Nickname</label>
-    <input placeholder="gimmie a name" v-model="urlNickname" id="url-alias" />
+      <label for="url-alias">URL Nickname</label>
+      <input placeholder="gimmie a name" v-model="urlNickname" id="url-alias" />
 
-    <button>submit</button>
-  </form>
+      <button>submit</button>
+    </form>
+  </div>
 </template>
 
 <style scoped>
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem;
+}
 form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 0.1rem white solid;
   padding: 2rem;
+  background-color: white;
+  width: fit-content;
+  border-radius: 5px;
+  color: black;
 }
 
 input {
@@ -81,6 +93,4 @@ button {
   color: white;
   font-weight: 900;
 }
-
-
 </style>

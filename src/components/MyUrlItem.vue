@@ -23,12 +23,24 @@ const handleActiveChange = () => {
       />
     </div>
     <h3>Alias : {{ urlItem.alias || "N/A" }}</h3>
-    <div>Original Url : {{ urlItem.originalUrl }}</div>
-    <div>Times Clicked :{{ urlItem.clicked }}</div>
+    <div>Original Link : {{ urlItem.originalUrl }}</div>
+    <div>
+      Quick Link :
+      <a
+        :href="'https://url-shortner-c0kv.onrender.com/' + urlItem.id"
+        target="_blank"
+        >https://url-shortner-c0kv.onrender.com/{{ urlItem.id }}</a
+      >
+    </div>
+
+    <div id="clicks">
+      Clicks
+      <div id="clicks-count">
+        {{ urlItem.clicked }}
+      </div>
+    </div>
   </li>
 </template>
-
-
 
 <style scoped>
 li {
@@ -36,9 +48,14 @@ li {
   list-style: none;
   background-color: white;
   color: black;
+  padding: 1.5rem;
+  padding-right: 4rem;
   margin: 1rem;
-  padding: 1rem;
-  width: 50%;
+  min-width: 60%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 5px;
 }
 
 #checkbox {
@@ -78,5 +95,33 @@ input[type="checkbox"]:checked {
 
 input[type="checkbox"]:checked::after {
   left: 70%;
+}
+
+h3 {
+  font-weight: 600;
+  font-size: x-large;
+}
+
+#clicks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: small;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 0.5rem;
+}
+
+#clicks-count {
+  background-color: #62f9ad;
+  border-radius: 50%;
+  height: 2.5rem;
+  width: 2.5rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
 }
 </style>

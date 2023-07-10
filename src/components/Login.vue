@@ -3,40 +3,80 @@ import { getToken } from "../utils/utils";
 import { useRouter } from "vue-router";
 import axios from "axios";
 import { ref } from "vue";
-import { EnvelopeIcon, KeyIcon } from "@heroicons/vue/24/solid";
+import { EnvelopeIcon, KeyIcon, UserIcon } from "@heroicons/vue/24/solid";
 const router = useRouter();
 
 const token = getToken();
 if (token) {
-  router.push("/url");
+  router.push("/home");
 }
 
 const email = ref("");
 const password = ref("");
+const username = ref("");
+const signin = ref(true);
 
 const login = () => {
+  if (signin.value) {
+    axios
+      .post("https://url-shortner-c0kv.onrender.com/v1/login", {
+        email: email.value,
+        password: password.value,
+      })
+      .then(({ data }) => {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("username", data.username);
+        router.push("/home");
+        email.value = "";
+        password.value = "";
+      })
+      .catch((err) => {
+        console.log("fail", err);
+      });
+  }
   axios
     .post("https://url-shortner-c0kv.onrender.com/v1/login", {
       email: email.value,
+      username: username.value,
       password: password.value,
     })
     .then(({ data }) => {
       localStorage.setItem("token", data.token);
+      localStorage.setItem("username", data.username);
+      router.push("/home");
       email.value = "";
       password.value = "";
+      username.value = "";
     })
     .catch((err) => {
       console.log("fail", err);
     });
+};
+
+const toggleSignin = () => {
+  signin.value = !signin.value;
 };
 </script>
 
 <template>
   <div id="container">
     <form @submit.prevent="login">
+      <div id="welcome">
+        <h1>Welcome</h1>
+      </div>
       <div class="input-container">
         <input placeholder="Email" v-model="email" type="email" id="email" />
         <EnvelopeIcon class="icon" />
+      </div>
+
+      <div v-if="!signin" class="input-container">
+        <input
+          placeholder="Name"
+          v-model="username"
+          type="text"
+          id="username"
+        />
+        <UserIcon class="icon" />
       </div>
 
       <div class="input-container">
@@ -49,12 +89,27 @@ const login = () => {
         <KeyIcon class="icon" />
       </div>
 
-      <button type="submit">login</button>
+      <button v-if="signin" type="submit">login</button>
+      <button v-if="!signin" type="submit">register</button>
+
+      <div v-if="signin" class="signup-link">
+        Don't have an account?
+        <button class="sign" @click="toggleSignin">register</button>
+      </div>
+
+      <div v-if="!signin" class="signup-link">
+        Already have an account? <button @click="toggleSignin">login</button>
+      </div>
     </form>
   </div>
 </template>
 
 <style scoped>
+#welcome {
+  text-align: center;
+  font-weight: 900;
+  padding-bottom: 2rem;
+}
 #container {
   display: flex;
   justify-content: center;
@@ -111,5 +166,19 @@ button {
   color: black;
   font-size: large;
   font-weight: 900;
+  border-radius: 5px;
+}
+
+.signup-link {
+  text-align: center;
+  font-size: small;
+}
+
+.signup-link button {
+  text-align: center;
+  font-size: medium;
+  background-color: white;
+  padding: 0;
+  text-decoration: underline;
 }
 </style>
