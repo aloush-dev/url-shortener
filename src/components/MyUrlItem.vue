@@ -96,32 +96,4 @@ input[type="checkbox"]:checked {
 input[type="checkbox"]:checked::after {
   left: 70%;
 }
-
-h3 {
-  font-weight: 600;
-  font-size: x-large;
-}
-
-#clicks {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: small;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  margin: 0.5rem;
-}
-
-#clicks-count {
-  background-color: #3ABEFF;
-  border-radius: 50%;
-  height: 2.5rem;
-  width: 2.5rem;
-  padding: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 700;
-}
 </style>
