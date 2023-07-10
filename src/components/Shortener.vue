@@ -1,6 +1,12 @@
 <script setup>
 import URLShortener from "./URLShortener.vue";
 import MyUrls from "./MyUrls.vue";
+import { getToken } from "../utils/utils";
+
+const token = getToken();
+if (!token) {
+  router.push("/");
+}
 </script>
 
 <template>

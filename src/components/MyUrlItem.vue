@@ -70,7 +70,7 @@ input[type="checkbox"] {
   position: relative;
   height: 35px;
   width: 60px;
-  background-color: white;
+  background-color: #FF213F;
   border-radius: 5rem;
   transition: background-color 0.2s;
   box-shadow: 0 0 15px #0000001e;
@@ -85,7 +85,7 @@ input[type="checkbox"]::after {
   height: 28px;
   width: 28px;
   border-radius: 50%;
-  background-color: rgb(47, 47, 68);
+  background-color: #181818;
   transition: left 0.2s;
 }
 
@@ -114,7 +114,7 @@ h3 {
 }
 
 #clicks-count {
-  background-color: #62f9ad;
+  background-color: #3ABEFF;
   border-radius: 50%;
   height: 2.5rem;
   width: 2.5rem;
